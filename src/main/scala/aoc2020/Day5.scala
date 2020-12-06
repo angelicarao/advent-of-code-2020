@@ -26,9 +26,11 @@ object Day5 {
 
           if (current == lowerChar)
             calculate(remainingChars.drop(1), lower, lower + difference, lowerChar, upperChar)
-          else {
+          else if (current == upperChar){
             calculate(remainingChars.drop(1), upper - difference, upper, lowerChar, upperChar)
           }
+          else
+            throw new IllegalArgumentException
       }
     }
 
@@ -52,7 +54,7 @@ object Day5 {
     val allRows = List.range(0, 128)
     val allColumns = List.range(0, 8)
     val airplaneMap = allRows.flatMap(r => allColumns.map(c => (r, c)))
-    
+
     val presentSeats = seats.map(s => (s.row, s.column))
 
     val missingSeats = airplaneMap.diff(presentSeats)
